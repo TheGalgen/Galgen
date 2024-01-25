@@ -20,14 +20,32 @@ public class GalgenJFrame extends JFrame {
   private JButton bWortfestlegen = new JButton();
   private JTextField tfLoesung = new JTextField();
   private JTextField tfRaten = new JTextField();
+  private JLabel l3balken = new JLabel();
+  private ImageIcon l3balkenIcon = new ImageIcon(getClass().getResource("images/3_Balken.png"));
+  private JLabel l4quer = new JLabel();
+  private ImageIcon l4querIcon = new ImageIcon(getClass().getResource("images/4_Quer.png"));
+  private JLabel l5strick = new JLabel();
+  private ImageIcon l5strickIcon = new ImageIcon(getClass().getResource("images/5_Strick.png"));
+  private JLabel l6kopf1 = new JLabel();
+  private ImageIcon l6kopf1Icon = new ImageIcon(getClass().getResource("images/6_Kopf.png"));
+  private JLabel l7body = new JLabel();
+  private ImageIcon l7bodyIcon = new ImageIcon(getClass().getResource("images/7_Body.png"));
+  private JLabel l9beine = new JLabel();
+  private ImageIcon l9beineIcon = new ImageIcon(getClass().getResource("images/9_Beine.png"));
+  private JLabel l8arme = new JLabel();
+  private ImageIcon l8armeIcon = new ImageIcon(getClass().getResource("images/8_Arme.png"));
+  private JLabel l1huegel = new JLabel();
+  private ImageIcon l1huegelIcon = new ImageIcon(getClass().getResource("images/1_Huegel.png"));
+  private JLabel l2mast = new JLabel();
+  private ImageIcon l2mastIcon = new ImageIcon(getClass().getResource("images/2_Mast.png"));
   // Ende Attribute
   
   public GalgenJFrame() { 
     // Frame-Initialisierung
     super();
     setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
-    int frameWidth = 528; 
-    int frameHeight = 564;
+    int frameWidth = 830; 
+    int frameHeight = 554;
     setSize(frameWidth, frameHeight);
     Dimension d = Toolkit.getDefaultToolkit().getScreenSize();
     int x = (d.width - getSize().width) / 2;
@@ -38,11 +56,24 @@ public class GalgenJFrame extends JFrame {
     Container cp = getContentPane();
     cp.setLayout(null);
     // Anfang Komponenten
-    tfRaten.setBounds(304, 144, 80, 24);
+    l2mast.setBounds(512, 152, 8, 232);
+    l2mast.setText("2 mast");
+    l2mast.setIcon(l2mastIcon);
+    cp.add(l2mast);
+    l1huegel.setBounds(400, 384, 232, 120);
+    l1huegel.setText("1 huegel");
+    l1huegel.setIcon(l1huegelIcon);
+    cp.add(l1huegel);
+    l7body.setBounds(704, 272, 8, 88);
+    l7body.setText("7 body");
+    l7body.setToolTipText("");
+    l7body.setIcon(l7bodyIcon);
+    cp.add(l7body);
+    tfRaten.setBounds(216, 144, 80, 24);
     cp.add(tfRaten);
-    tfLoesung.setBounds(304, 200, 80, 24);
+    tfLoesung.setBounds(216, 200, 80, 24);
     cp.add(tfLoesung);
-    bWortfestlegen.setBounds(72, 200, 192, 24);
+    bWortfestlegen.setBounds(8, 200, 192, 24);
     bWortfestlegen.setText("Wort festlegen");
     bWortfestlegen.setMargin(new Insets(2, 2, 2, 2));
     bWortfestlegen.addActionListener(new ActionListener() { 
@@ -51,7 +82,7 @@ public class GalgenJFrame extends JFrame {
       }
     });
     cp.add(bWortfestlegen);
-    bRaten.setBounds(72, 144, 80, 24);
+    bRaten.setBounds(8, 144, 80, 24);
     bRaten.setText("Raten");
     bRaten.setMargin(new Insets(2, 2, 2, 2));
     bRaten.addActionListener(new ActionListener() { 
@@ -61,6 +92,31 @@ public class GalgenJFrame extends JFrame {
     });
     cp.add(bRaten);
     
+    cp.setBackground(Color.WHITE);
+    l3balken.setBounds(512, 144, 200, 8);
+    l3balken.setText("3 balken");
+    l3balken.setIcon(l3balkenIcon);
+    cp.add(l3balken);
+    l4quer.setBounds(520, 144, 56, 72);
+    l4quer.setText("4 quer");
+    l4quer.setIcon(l4querIcon);
+    cp.add(l4quer);
+    l5strick.setBounds(704, 152, 8, 80);
+    l5strick.setText("5 strick");
+    l5strick.setIcon(l5strickIcon);
+    cp.add(l5strick);
+    l6kopf1.setBounds(685, 229, 48, 48);
+    l6kopf1.setText("6 kopf");
+    l6kopf1.setIcon(l6kopf1Icon);
+    cp.add(l6kopf1);
+    l8arme.setBounds(646, 280, 128, 24);
+    l8arme.setText("8 arme");
+    l8arme.setIcon(l8armeIcon);
+    cp.add(l8arme);
+    l9beine.setBounds(672, 352, 72, 88);
+    l9beine.setText("9 beine");
+    l9beine.setIcon(l9beineIcon);
+    cp.add(l9beine);
     // Ende Komponenten
     
     setVisible(true);
@@ -87,12 +143,54 @@ public class GalgenJFrame extends JFrame {
       {
         if (word.charAt(i) == buchstabe.charAt(0)) 
         {
-          
+          ratewort.setCharAt(i, buchstabe.charAt(0)); 
         } 
       }
-    }                                                                        
-  } 
-
+    }
+    else 
+    {
+      for (int i = 0; i < 9; i++)
+      {
+        if (i == 1) 
+        {
+          l1huegel.setVisible(true);
+        } 
+        if (i == 2) 
+        {
+          l2mast.setVisible(true);
+        } 
+        if (i == 3) 
+        {
+          l3balken.setVisible(true);
+        } 
+        if (i == 4) 
+        {
+          l4quer.setVisible(true);
+        } 
+        if (i == 5) 
+        {
+          l5strick.setVisible(true);
+        } 
+        if (i == 6) 
+        {
+          l6kopf1.setVisible(true); 
+        }
+        if (i == 7) 
+        {
+          l7body.setVisible(true); 
+        }
+        if (i == 8) 
+        {
+          l8arme.setVisible(true); 
+        }
+        if (i == 9) 
+        {
+          l9beine.setVisible(true); 
+        }
+      }                                                                         
+    } 
+  }
+  
   public void bWortfestlegen_ActionPerformed(ActionEvent evt) 
   {
     tfLoesung.setVisible (false);
@@ -110,6 +208,16 @@ public class GalgenJFrame extends JFrame {
     tfLoesung.setText(word);
     
     ratewort = new StringBuilder("_".repeat(word.length()));
+    
+    l1huegel.setVisible(false); 
+    l2mast.setVisible(false);
+    l3balken.setVisible(false);
+    l4quer.setVisible(false);
+    l5strick.setVisible(false);
+    l6kopf1.setVisible(false);
+    l7body.setVisible(false);
+    l8arme.setVisible(false);
+    l9beine.setVisible(false);
   } // end of bWortfestlegen_ActionPerformed
 
   // Ende Methoden
