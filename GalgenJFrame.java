@@ -15,6 +15,7 @@ import java.util.Random;
 public class GalgenJFrame extends JFrame {
   // Anfang Attribute
   //private String[] wordList = {"Datentyp", "Objekt", "Funktion", "Datenbank", "Klasse", "Array"};
+  private int j = 1;
   private StringBuilder ratewort;
   private JButton bRaten = new JButton();
   private JButton bWortfestlegen = new JButton();
@@ -39,6 +40,8 @@ public class GalgenJFrame extends JFrame {
   private JLabel l2mast = new JLabel();
   private ImageIcon l2mastIcon = new ImageIcon(getClass().getResource("images/2_Mast.png"));
   private JTextField tfstriche = new JTextField();
+  private JTextField jTextField1 = new JTextField();
+  private JLabel lGalgenmaennchen = new JLabel();
   // Ende Attribute
   
   public GalgenJFrame() { 
@@ -46,7 +49,7 @@ public class GalgenJFrame extends JFrame {
     super();
     setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
     int frameWidth = 830; 
-    int frameHeight = 583;
+    int frameHeight = 555;
     setSize(frameWidth, frameHeight);
     Dimension d = Toolkit.getDefaultToolkit().getScreenSize();
     int x = (d.width - getSize().width) / 2;
@@ -57,7 +60,16 @@ public class GalgenJFrame extends JFrame {
     Container cp = getContentPane();
     cp.setLayout(null);
     // Anfang Komponenten
-    tfstriche.setBounds(48, 304, 232, 24);
+    lGalgenmaennchen.setBounds(352, 24, 199, 80);
+    lGalgenmaennchen.setText("Galgenmännchen");
+    lGalgenmaennchen.setBackground(Color.WHITE);
+    lGalgenmaennchen.setOpaque(true);
+    lGalgenmaennchen.setFont(new Font("Bauhaus 93", Font.BOLD, 20));
+    cp.add(lGalgenmaennchen);
+    jTextField1.setBounds(8, 360, 328, 144);
+    cp.add(jTextField1);
+    tfstriche.setBounds(48, 304, 248, 24);
+    tfstriche.setCursor(new Cursor(Cursor.TEXT_CURSOR));
     cp.add(tfstriche);
     l2mast.setBounds(512, 152, 8, 232);
     l2mast.setText("2 mast");
@@ -133,6 +145,7 @@ public class GalgenJFrame extends JFrame {
   
   public void bRaten_ActionPerformed(ActionEvent evt) 
   {
+    jTextField1.setText(" ");
     System.out.println("Test");
     String word = new String();
     word = tfLoesung.getText();
@@ -141,99 +154,127 @@ public class GalgenJFrame extends JFrame {
     char buchstabe = zwischenwert.charAt(0); */
     String  buchstabe = new String();
     buchstabe = tfRaten.getText();
-    if (word.indexOf(buchstabe)>=0)
+    
+    if (tfLoesung.getText() == tfstriche.getText()) 
+    {                                                         
+      jTextField1.setText("Du hast gewonnen!");
+      System.out.println("gewinn");
+      
+    } 
+    if (word.indexOf(buchstabe)>=0 && buchstabe.length()==1)
     {
-      for (int i = 0; i < word.length(); i++) 
+      int i = 0;
+      for ( i = 0; i < word.length(); i++) 
       {
         if (word.charAt(i) == buchstabe.charAt(0)) 
         {
           ratewort.setCharAt(i, buchstabe.charAt(0)); 
           tfstriche.setText(ratewort.toString());
-        } 
+          /*if (tfLoesung.getText() == tfstriche.getText()) 
+          {                                                         
+            jTextField1.setText("Du hast gewonnen!");
+            System.out.println("gewinn");
+            
+          }   */
+        }
+        
       }
+      
     }
-    else 
-    {
-      for (int i = 0; i < 10; i++)
+      else if (word.indexOf(buchstabe)<0 && buchstabe.length()==1)
       {
-        if (i == 1) 
+        jTextField1.setText(" ");
+        if (j >= 1) 
         {
           l1huegel.setVisible(true);
         }
-        /*if (i <= 2) 
-        {
-        l2mast.setVisible(false);
-        }*/
-        if (i == 2) 
+        if (j >= 2) 
         {
           l2mast.setVisible(true);
-        } 
-        if (i == 3) 
+        }
+        if (j >= 3) 
         {
           l3balken.setVisible(true);
         } 
-        if (i == 4) 
+        if (j >= 4) 
         {
           l4quer.setVisible(true);
         } 
-        if (i == 5) 
+        if (j >= 5) 
         {
           l5strick.setVisible(true);
         } 
-        if (i == 6) 
+        if (j >= 6) 
         {
           l6kopf1.setVisible(true); 
         }
-        if (i == 7) 
+        if (j >= 7) 
         {
           l7body.setVisible(true); 
         }
-        if (i == 8) 
+        if (j >= 8) 
         {
           l8arme.setVisible(true); 
         }
-        if (i == 9) 
+        if (j >=9) 
         {
-          l9beine.setVisible(true); 
+          l9beine.setVisible(true);
+          tfstriche.setText(word);
+          jTextField1.setText("Du hast verloren! Liesz ma du denn Duden"); 
         }
-      }                                                                         
-    } 
+        j = j+1;
+      }
+        else if (word.indexOf(buchstabe)<0 && buchstabe.length()>1)
+        {
+          jTextField1.setText("Falsche Eingabe! Bitte einzelnen Buchstaben eingeben.");
+        }
+        
+    tfRaten.setText(null);
   }
-  
   public void bWortfestlegen_ActionPerformed(ActionEvent evt) 
   {                                  
     System.out.println("ksdkdkdkdkdk");
     
     String word = new String();
     word = tfLoesung.getText();
+    word = word.toLowerCase();
     
-    tfLoesung.setVisible (false);
-    
-    //word = tfLoesung.getText();
-    //int felderzahl = word.length();
-    
-    //Random random = new Random();
-    //int randomint = random.nextInt(7);
-    //word = wordList[randomint];
-    
-    tfLoesung.setText(word);
-    
-    ratewort = new StringBuilder("_".repeat(word.length()));
-    
-    l1huegel.setVisible(false); 
-    l2mast.setVisible(false);
-    l3balken.setVisible(false);
-    l4quer.setVisible(false);
-    l5strick.setVisible(false);
-    l6kopf1.setVisible(false);
-    l7body.setVisible(false);
-    l8arme.setVisible(false);
-    l9beine.setVisible(false);
-    
-    tfstriche.setText(ratewort.toString());
-    
-    System.out.println(word);
+    if (word.length() >=1)
+    {
+      
+      tfLoesung.setVisible (false);
+      
+      //word = tfLoesung.getText();
+      //int felderzahl = word.length();
+      
+      //Random random = new Random();
+      //int randomint = random.nextInt(7);
+      //word = wordList[randomint];
+      
+      tfLoesung.setText(word);
+      
+      ratewort = new StringBuilder("_".repeat(word.length()));
+      
+      l1huegel.setVisible(false); 
+      l2mast.setVisible(false);
+      l3balken.setVisible(false);
+      l4quer.setVisible(false);
+      l5strick.setVisible(false);
+      l6kopf1.setVisible(false);
+      l7body.setVisible(false);
+      l8arme.setVisible(false);
+      l9beine.setVisible(false);
+      
+      tfstriche.setText(ratewort.toString());
+      
+      jTextField1.setText(" ");
+    }
+      else if (word.length()<1) 
+      {
+        jTextField1.setText("Bitte gib ein Wort an.");
+      }
   } // end of bWortfestlegen_ActionPerformed
-
-  // Ende Methoden
+      
+      // Ende Methoden
 } // end of class GalgenJFrame
+    
